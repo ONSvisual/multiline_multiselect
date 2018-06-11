@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})
+  (window,document,'script','dataLayer','GTM-MBCBVQS');
+  </script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <title>Top 100 baby names, 2017</title>
 
@@ -196,7 +199,9 @@ input{
     </style>
 </head>
 <body>
-
+  <noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MBCBVQS" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
 	<section>
 				<div class="tabs tabs-style-iconfall">
 					<nav>
@@ -609,6 +614,13 @@ input{
 						.on("click",function(d,i){
 							currclass = d3.select(this).attr("id");
 
+areaname = dataarray[0].columns[parseInt(currclass.replace("index", ""))+1]
+
+              dataLayer.push({
+                  'event': 'lineClickSelect',
+                  'selected': areaname
+              })
+
 							if(listnames.indexOf(currclass) == -1 && listnames.length <= 5) {
 								listnames.push(currclass);
 							}
@@ -681,6 +693,17 @@ input{
 
 
 										myId=params.selected;
+
+                    if(myId != undefined){
+
+                      areaname = dataarray[0].columns[parseInt(myId.replace("index", ""))+1]
+
+                      dataLayer.push({
+                          'event': 'lineDropSelect',
+                          'selected': areaname
+                      })
+                    
+                    }
 
 										myDeselect=params.deselected;
 
