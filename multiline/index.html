@@ -316,6 +316,11 @@ ul.key{
     }
 
     function buildDropdowns(){
+      d3.select("#sel").selectAll("*").remove()
+      d3.select("#sel2").selectAll("*").remove()
+      d3.select("#sel").remove()
+      d3.select("#sel2").remove()
+
       //get column names
       colnames=[];
 
@@ -370,6 +375,7 @@ ul.key{
           .attr("style","width:98%")
           .attr("multiple",true)
           .attr("class","chosen-select")
+          .attr("data-placeholder","Choose a category")
         .selectAll('option')
           .data(comparenames)
           .enter()
@@ -383,14 +389,13 @@ ul.key{
       var threshold_md = 788;
       var threshold_sm = 400;
 
+
+      // clear out existing graphics
+      graphic.empty();
+
       var margin={top:30,right:30,bottom:10,left:50}
       var chart_width=graphic.width() - margin.left - margin.right;
       var height = 0.7*chart_width-margin.top - margin.bottom
-
-        // clear out existing graphics
-        graphic.empty();
-        // keypoints.empty();
-        // footer.empty();
 
         x = d3.scaleTime()
 		        .range([0, chart_width]);
