@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})
+  (window,document,'script','dataLayer','GTM-MBCBVQS');
+  </script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <title>Wage growth by characteristics</title>
+
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" href="../lib/globalStyle.css" />
+    <link rel="stylesheet" href="../lib/styles.css"/>
+    <link rel="stylesheet" href="../lib/style-chosen.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/tabstyles.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap-grid.css"/>
+    <style type="text/css">
+
+      body {
+          max-width:700px;
+          margin: 0px auto;
+    			font-family:"Open Sans", Arial, Helvetica, sans-serif;
+    			padding-bottom:40px;
+      }
+
+     #graphic .selected { stroke-width: 2px  !important; fill:none;}
+
+		.border0 { border-top: 2px solid #66c2a5; }
+    .border1 { border-top: 2px solid #fc8d62; }
+    .border2 { border-top: 2px solid #8da0cb; }
+		.border3 { border-top: 2px solid #e78ac3; }
+    .border4 { border-top: 2px solid #a6d854; }
+    .border5 { border-top: 2px solid #666; }
+
+    .rect{
+			fill:#BBBFD7;
+			opacity:0.16;
+			pointer-events:none;
+		}
+
+		/* x-axis line path */
+        #graphic .axis.y path /* required */
+		{
+			display: none;
+		}
+
+		/* x-axis line path */
+	    #graphic .axis.x path /* required */
+		{
+			display: inline;
+		}
+
+		.btnEnable, .clearBtn {
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			width: 40px;
+			border: none;
+			padding: 6px 0;
+			background-color: #0084d1;
+			font: 700 14px Arial;
+			color: #FFF;
+			filter: inherit;
+			-webkit-appearance: button;
+			cursor: pointer;
+			margin-right:5px;
+	}
+
+	form{
+		float:left;
+	}
+
+	@media (min-width: 768px) {
+	#areanm	{
+
+		font-size:20px;
+		color:#666;
+		min-width:1%;
+		font-family:open_sanssemibold, Arial, Helvetica, sans-serif;
+		text-align:center;
+		}
+
+		#footer {
+			position: relative;
+			top: -50px;
+		}
+
+	}
+
+
+
+	@media (max-width: 767px) {
+	#areanm
+	{
+		font-size:16px;
+		color:#666;
+		font-weight:700;
+		text-align:center;
+	}
+
+		#footer {
+			position: relative;
+			top: -20px;
+		}
+
+
+	}
+
+.row{
+	padding-bottom:10px;
+}
+
+/* .search-choice:nth-child(1) {
+    border-left: #66c2a5 12px  solid !important;
+}
+
+.search-choice:nth-child(2) {
+    border-left: #fc8d62 12px  solid !important;
+}
+
+.search-choice:nth-child(3) {
+    border-left:  #8da0cb 12px  solid !important;
+}
+
+.search-choice:nth-child(4) {
+    border-left:  #e78ac3 12px  solid !important;
+}
+
+.search-choice:nth-child(5) {
+    border-left:  #a6d854 12px  solid !important;
+}
+
+.search-choice:nth-child(6) {
+    border-left:  #666 12px  solid !important;
+} */
+
+
+.intro {
+	font-family:"Open Sans", Arial, Helvetica, sans-serif;
+	font-size:20px;
+	font-weight:bold !important;
+	color:#414042;
+	padding-top: 8px;
+}
+
+/* p {
+    margin: 0px 0 5px !important;
+} */
+
+input{
+    font-family: inherit;
+    font-size: 12px;
+    line-height: inherit;
+    height: 18px;
+  	padding: 0 !important;
+  	margin: 0 !important;
+}
+
+.tabs li {
+	cursor:pointer;
+	border-color: #A6A8AB;
+	border-style: solid;
+   	border-width: 1px;
+   	margin-right: 12px !important;
+   	margin-bottom: 16px !important;
+   	margin-top: 16px !important;
+}
+
+#sel {
+	padding-bottom:10px;
+}
+
+
+.row {
+	display:table;
+	width:100%;
+}
+
+.icon:before {
+      content: url('./images/search.svg');
+      position: absolute;
+      top: 5px;
+    }
+
+.img {
+	margin-bottom: -14px;
+	margin-right: -4px;
+	padding: 0;
+}
+
+.search-field {
+	padding-left: 6px !important;
+	padding-top: 4px !important;
+}
+
+/*  Legend */
+ul.key{
+  padding=0;
+}
+
+#legend .key li {
+    display: inline-block;
+    margin: 0 18px 0 0;
+    padding: 0;
+    line-height: 15px;
+}
+
+#legend .key b {
+    display: inline-block;
+    width: 35px;
+    height: 15px;
+    margin-right: 6px;
+    float: left;
+    background-color: none;
+    margin-top: 8px;
+}
+
+#legend {
+  min-height: 23px;
+}
+
+.bar-0 { fill: #234D70; }
+.bar-1 { fill: #E2BC22; }
+.bar-2 { fill: #266D4A; }
+.bar-3 { fill: #36ADD9; }
+.bar-4 { fill: #B8860B; }
+.key-0 b {margin-top:0px !important; width: 15px !important; background-color: #234D70; }
+.key-1 b {margin-top:0px !important; width: 15px !important; background-color: #E2BC22; }
+.key-2 b {margin-top:0px !important; width: 15px !important; background-color: #266D4A; }
+.key-3 b {margin-top:0px !important; width: 15px !important; background-color: #36ADD9; }
+.key-4 b {margin-top:0px !important; width: 15px !important; background-color: #B8860B; }
+
+.tooltip {
+  margin-bottom: 1em;
+  min-height: 3em;
+}
+
+  </style>
+  </head>
+  <body>
+  <noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MBCBVQS" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+	<!-- <section>
+				<div class="tabs tabs-style-iconfall">
+					<nav>
+						<ul>
+
+						</ul>
+					</nav>
+				</div>
+	</section> -->
+
+
+  <div class="row">
+
+    <div id="chosensel" class="col-sm-12 col-xs-12"><h3 class="intro">Choose characteristics to filter </h3><p>Filter the results by one or more of the following characteristics from any category.</p> </div>
+    <div id="chosensel2" class="col-sm-12 col-xs-12"><h3 class="intro">Choose a category to compare</h3><p>Compare characteristics within a category.</p> </div>
+  </div>
+
+     <div id="legend"></div>
+     <div class="row">
+      	<div id="graphic" class="col-sm-9 col-xs-12">
+          	<img src="fallback.png" alt="[Chart]" />
+        </div>
+
+    <div id="keypoints" class="col-sm-3 col-xs-12">
+        <p class="tooltip">Education:<br/>
+        <span id="educationtext" style="font-weight:lighter"></span></p>
+
+        <p class="tooltip">Age:<br/>
+        <span id="agetext" style="font-weight:lighter"></span></p>
+
+        <p class="tooltip">Sex:<br/>
+        <span id="sextext" style="font-weight:lighter"></span></p>
+
+        <p class="tooltip">Ethnicity:<br/>
+        <span id="ethnicitytext" style="font-weight:lighter"></span></p>
+
+        <p class="tooltip">Region:<br/>
+        <span id="regiontext" style="font-weight:lighter"></span></p>
+
+    </div>
+     </div>
+   <div class="footer"></div>
+   <div id="footer"></div>
+
+
+    <script src="../lib/jquery.js" type="text/javascript"></script>
+    <script src="../lib/chosen.jquery.js" type="text/javascript"></script>
+    <script src="../lib/chosen.order.jquery.min.js" type="text/javascript" ></script>
+    <script src="https://cdn.ons.gov.uk/vendor/d3/4.13.0/d3.min.js" type="text/javascript"></script>
+    <script src="../lib/modernizr.svg.min.js" type="text/javascript"></script>
+    <script src="../lib/pym.js" type="text/javascript"></script>
+    <script src="../lib/queue.js" type="text/javascript"></script>
+    <script src="../lib/lodash.js" type="text/javascript"></script>
+
+
+    <script>
+
+    filternames={};
+    function initialise(){
+      d3.queue()
+      .defer(d3.csv,"dummydata.csv")
+      .await(ready)
+    }
+
+    function ready(error,data){
+      globaldata=data;
+      buildDropdowns()
+      drawGraphic()
+    }
+
+    function buildDropdowns(){
+      d3.select("#sel").selectAll("*").remove()
+      d3.select("#sel2").selectAll("*").remove()
+      d3.select("#sel").remove()
+      d3.select("#sel2").remove()
+
+      //get column names
+      colnames=[];
+
+      for (var column in globaldata[0]){
+          if (column == 'y2011'|column=='y2012'|column=='y2013'|column=='y2014'|column=='y2015') continue;
+               colnames.push(column);
+      }
+      //get different options for each column
+      for(i=0;i<colnames.length;i++){
+        filternames[colnames[i]]=[]
+        for(j=0;j<globaldata.length;j++){
+          filternames[colnames[i]].push(globaldata[j][colnames[i]])
+        }
+          //get uniques
+          filternames[colnames[i]]=filternames[colnames[i]].filter(function(item,post){return filternames[colnames[i]].indexOf(item)===post})
+      }
+      //push to a new object
+      optGroup=[]
+      for(i=0;i<colnames.length;i<i++){
+        optGroup.push({"key":colnames[i],"values":filternames[colnames[i]]})
+      }
+
+
+      //make it like this person
+      //http://bl.ocks.org/jfreels/6811178
+      var optns = d3.select("#chosensel").append("div").attr("id","sel")
+        .append("select")
+          .attr("id","occselect")
+          .attr("style","width:98%")
+          .attr("multiple",true)
+          .attr("class","chosen-select")
+        .selectAll('optgroup')
+          .data(optGroup)
+          .enter()
+        .append('optgroup')
+          .attr('label',function(d){return d.key})
+        .selectAll('option')
+          .data(function(d){return d.values})
+          .enter()
+        .append('option')
+          .attr('value',function(d){return d})
+          .text(function(d){return d})
+
+      //find where the one variable you don't want to compare is
+       var findit=colnames.indexOf("Region")
+       var comparenames=_.clone(colnames)
+           comparenames.splice(findit,1)
+
+      var optns2 = d3.select("#chosensel2").append("div").attr("id","sel2")
+        .append("select")
+          .attr("id","occselect2")
+          .attr("style","width:98%")
+          .attr("multiple",true)
+          .attr("class","chosen-select")
+          .attr("data-placeholder","Choose a category")
+        .selectAll('option')
+          .data(comparenames)
+          .enter()
+        .append('option')
+          .attr('value',function(d){return d})
+          .text(function(d){return d})
+    }//end buildDropdowns
+
+    function drawGraphic(){
+      var graphic = $('#graphic');
+      var threshold_md = 788;
+      var threshold_sm = 400;
+
+
+      // clear out existing graphics
+      graphic.empty();
+
+      var margin={top:30,right:30,bottom:10,left:50}
+      var chart_width=graphic.width() - margin.left - margin.right;
+      var height = 0.7*chart_width-margin.top - margin.bottom
+
+        x = d3.scaleTime()
+		        .range([0, chart_width]);
+
+		    y = d3.scaleLinear()
+		        .range([height, 0]);
+
+        x.domain([d3.timeParse("%Y")(2011),d3.timeParse("%Y")(2015)])
+
+		    var xAxis = d3.axisBottom(x).ticks(4)
+
+        var yAxis = d3.axisLeft(y)
+
+
+		    //gridlines
+		    var y_axis_grid = function() { return yAxis; }
+
+        var line = d3.line()
+        .curve(d3.curveMonotoneX)
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.amt); })
+        .defined(function(d) {return !isNaN(d.amt); });
+
+        //reformat the data for the lines with some hardcoding
+        lines=[]
+        for(i=0;i<globaldata.length;i++){
+          lines.push({"key":"index"+i,
+                      "education":stripspaces(globaldata[i]["Education"]),
+                      "region":stripspaces(globaldata[i]["Region"]),
+                      "age":stripspaces(globaldata[i]["Age"]),
+                      "sex":globaldata[i]["Sex"],
+                      "ethnicity":globaldata[i]["Ethnicity"],
+                      "value":[{"date": new Date("2011"),"amt":+globaldata[i]["y2011"],"Education":globaldata[i]["Education"],"Region":globaldata[i]["Region"],"Age":globaldata[i]["Age"],"Sex":globaldata[i]["Sex"],"Ethnicity":globaldata[i]["Ethnicity"]},
+                               {"date": new Date("2012"),"amt":+globaldata[i]["y2012"],"Education":globaldata[i]["Education"],"Region":globaldata[i]["Region"],"Age":globaldata[i]["Age"],"Sex":globaldata[i]["Sex"],"Ethnicity":globaldata[i]["Ethnicity"]},
+                               {"date": new Date("2013"),"amt":+globaldata[i]["y2013"],"Education":globaldata[i]["Education"],"Region":globaldata[i]["Region"],"Age":globaldata[i]["Age"],"Sex":globaldata[i]["Sex"],"Ethnicity":globaldata[i]["Ethnicity"]},
+                               {"date": new Date("2014"),"amt":+globaldata[i]["y2014"],"Education":globaldata[i]["Education"],"Region":globaldata[i]["Region"],"Age":globaldata[i]["Age"],"Sex":globaldata[i]["Sex"],"Ethnicity":globaldata[i]["Ethnicity"]},
+                               {"date": new Date("2015"),"amt":+globaldata[i]["y2015"],"Education":globaldata[i]["Education"],"Region":globaldata[i]["Region"],"Age":globaldata[i]["Age"],"Sex":globaldata[i]["Sex"],"Ethnicity":globaldata[i]["Ethnicity"]}]
+                     })
+        }
+
+        y.domain([0,1200])
+
+        //create svg for chart
+		    svg = d3.select('#graphic').append('svg')
+				        .attr("width", chart_width + margin.left + margin.right)
+				        .attr("height", height + margin.top + margin.bottom +30)
+				        .append("g")
+				        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+				svg.append("rect")
+      					.attr("class","svgRect")
+      					.attr("width", chart_width)
+      					.attr("height", height)
+
+				svg.append("text")
+	                .attr('class', 'unit')
+        					.attr('y',-10)
+        					.attr('x',-margin.left)
+	  		          .text("£");
+
+		    svg.append('g')
+		        .attr('class', 'y axis')
+		        .call(yAxis);
+
+		    svg.append('g')
+		        .attr('class', 'y grid')
+		        .call(y_axis_grid()
+            .tickSize(-chart_width, 0, 0)
+            .tickFormat('')
+		        );
+
+        svg.append('g')
+              .attr('class', 'x axis')
+              .attr('transform','translate(0,' + height  + ')')
+              .call(xAxis);
+
+        //create lines
+          svg.append('g')
+          .attr("class", "linegroup")
+          .selectAll('path')
+              .data(lines)
+              .enter()
+              .append('path')
+              .attr('class', function(d){return 'line '+ d.age +" "+ d.education+" "+d.ethnicity+" "+d.region+" "+d.sex})
+              // .style("fill","blue")
+              .attr("stroke","#58595B")
+              .attr("stroke-opacity",0.2)
+              .style("stroke-width","1px")
+              .attr('id', function(d, i) {return d.key})
+              .attr('d', function(d) {
+                  return line(d.value);
+              })
+
+
+         voronoi = d3.voronoi()
+              .x(function(d){return x(d.date)})
+              .y(function(d){return y(d.amt)})
+              .extent([[-margin.left,-margin.top],[chart_width+margin.right, height+margin.bottom]])
+              (d3.merge(lines.map(function(d){return d.value})));
+
+          // var focus = svg.append("g")
+          //     .attr("class", "focus");
+
+              // focus.append("circle")
+              //     .attr("id","focuscircle")
+              //     .attr("r", 3.5);
+
+              svg.append('rect')
+              .attr('class', 'overlay')
+              .attr('x',0)
+              .attr('y',0)
+              .attr('width', chart_width)
+              .attr('height', height)
+              // .style('fill', 'red')
+              .style('opacity', 0)
+              .on('mousemove', mouseMoveHandler)
+              .on('mouseleave', mouseLeave)
+
+              d3.select(".footer").append("p")
+                  .text("Source: ")
+                  .append("a")
+                  .attr("href", "")
+                  .attr("target", "_blank")
+                  .html("Statistics");
+
+
+                  //make it chosen
+                  $('#occselect').chosen({width: "98%", max_selected_options: 6,placeholder_text_multiple: "Choose characteristics"}).on('change',function(evt,params){
+                    if(typeof params != 'undefined') {
+                        onDropdown();
+                    }
+                  })
+
+                  $('#occselect2').chosen({width: "98%", max_selected_options: 1,placeholder_text_single: "Choose a category"}).on('change',function(evt,params){
+                    if(typeof params !='undefined'){
+                      onDropdown();
+                    }
+                  })
+
+                  function onDropdown(){
+                    selected=$("#occselect").val()
+                    selected2=$("#occselect2").val()
+
+                    //reset all lines to grey
+                    d3.selectAll(".line").attr('stroke',"#58595B")
+                    d3.selectAll(".line").attr('stroke-opacity',0.2)
+
+                    //clear the legend
+                    d3.select('#legend').selectAll("*").remove()
+                    if(selected2!=null){
+                      comparelines(selected2)
+                    }
+
+                    if (selected!=null) {
+                    // if array is not empty
+                      highlightLines(selected)
+                    }else{
+                      newvoronoi = d3.voronoi()
+                           .x(function(d){return x(d.date)})
+                           .y(function(d){return y(d.amt)})
+                           .extent([[-margin.left,-margin.top],[chart_width+margin.right, height+margin.bottom]])
+                           (d3.merge(lines.map(function(d){return d.value})));
+                    }
+
+                  }
+
+                  function comparelines(comparedVariable){
+
+                    var legend = d3.select('#legend').append('ul')
+                            					.attr('class', 'key')
+                            					.selectAll('g')
+                            					.data(filternames[comparedVariable])
+                            					.enter().append('li')
+                            					.attr("class",function(d,i){return "key-" + i})
+
+                        legend.append('b')
+                      	legend.append('label')
+                      		.html(function(d,i) { return filternames[comparedVariable][i]; });
+
+
+                    colours=["#234D70","#E2BC22","#266D4A","#36ADD9","#B8860B"]
+                    console.log(filternames[comparedVariable])
+                    for(i=0;i<filternames[comparedVariable].length;i++){
+                      $('.'+stripspaces(filternames[comparedVariable][i])).attr('stroke',colours[i])
+                      $('.'+stripspaces(filternames[comparedVariable][i])).attr("stroke-opacity","1.0")
+                    }
+
+                  }//end comparelines
+
+                  function highlightLines(selectedcategories){
+                    //make an object to store selected variables
+                    selectedObject={};
+
+                    //make an blank array for each colnames to store the index of the selected variable in
+                    for(i=0;i<Object.keys(filternames).length;i++){
+                      selectedObject[colnames[i]]=[]
+                    }
+
+                    // for each selected variable, look through all the possible choices and find the index of the selected variables of the list
+                    selectedcategories.forEach(function(d){
+                      for(i=0;i<Object.keys(filternames).length;i++){
+                        if(filternames[colnames[i]].findIndex(function(e){return e==d})!=-1){//ignore when it can't find the variable
+                          selectedObject[colnames[i]].push(filternames[colnames[i]].findIndex(function(e){return e==d}))//push the index of the found variable into selectedObject array for that key
+                        }
+                      }
+                    })
+
+                  //put just the selected things in another object
+                  biscottiObject={};
+                  //for each key in selectedObject get the selected characteristic from the index
+                    Object.keys(selectedObject).forEach(function(key){
+                        if(selectedObject[key].length>0){
+                          biscottiObject[key]=[]
+                          for(i=0;i<selectedObject[key].length;i++){
+                              biscottiObject[key].push(filternames[key][selectedObject[key][i]])
+                          }//end for
+                        }//end if
+                    });
+                    console.log(biscottiObject)
+
+                    datafilters=makeselectdatafilters(biscottiObject)
+                    newlines=filterlines(datafilters)
+                    newvoronoi = d3.voronoi()
+                         .x(function(d){return x(d.date)})
+                         .y(function(d){return y(d.amt)})
+                         .extent([[-margin.left,-margin.top],[chart_width+margin.right, height+margin.bottom]])
+                         (d3.merge(newlines.map(function(d){return d.value})));
+
+
+                    //for all the selected bits, join them together to make jquery selectors
+                    classedjoined=jointhis(biscottiObject)
+                    selectedjoined=classedjoined.join(',')
+                    console.log(selectedjoined)
+                    //make all lines not visible
+                    $(".line").attr("stroke-opacity","0.0")
+                    // $(".line").attr("display","none")
+                    //then bring up the selected lines
+                    $(selectedjoined).attr('stroke-opacity',"1")
+                    // $(selectedjoined).attr('display',"block")
+                  }//end of highlightLines
+
+                  function makeselectdatafilters(cheeseobject){
+                    //make an array to incrementally store joined values
+                    parmesan=[[]];
+                    //for the first object, push it into the Array
+                    for(i=0;i<cheeseobject[Object.keys(cheeseobject)[0]].length;i++){
+                      parmesan[0].push([{"key":Object.keys(cheeseobject)[0],"value":cheeseobject[Object.keys(cheeseobject)[0]][i]}])
+                    }
+
+                    //map the joined array to the next array in the Object
+                    //if there's more than two variables
+                    if(Object.keys(cheeseobject).length>1){
+                      //start with the second variable until all the variables are done
+                      for(i=1;i<Object.keys(cheeseobject).length;i++){
+                        //create a next gen array to store stuff
+                        parmesan[i]=[[]];
+
+                        //create kth array to store new pairs
+                        k=0;
+                        parmesan[i-1].map(function(d){
+                            for(j=0;j<cheeseobject[Object.keys(cheeseobject)[i]].length;j++){
+                              parmesan[i][k]=[]
+                              k++;
+                            }
+                        })
+
+                        //push the old pairs in, and then add in the new pair
+                        k=0;
+                        parmesan[i-1].map(function(d){
+                            for(j=0;j<cheeseobject[Object.keys(cheeseobject)[i]].length;j++){
+                                  d.forEach(function(e){
+                                    parmesan[i][k].push(e)
+                                  })
+                                  parmesan[i][k].push({"key":Object.keys(cheeseobject)[i],"value":cheeseobject[Object.keys(cheeseobject)[i]][j]})
+                                  k++;
+                            }
+                        })
+                      }
+                    }
+                    console.log(parmesan[parmesan.length-1])
+                    //now we have our key&value filters
+
+                    //go through and filter the data each time for our sets of filters
+                    ourFilters=parmesan[parmesan.length-1]
+
+                    filterDataEach=[]
+                    ourFilters.forEach(function(d,i){
+                        filterDataEach[i]=globaldata.reduce(function(total,element){
+                          for(j=0;j<d.length;j++){
+                          total=total.filter(function(e){return e[d[j].key]==d[j].value})
+                          }
+                          return total
+                        },globaldata)
+                    })
+
+                    console.log(filterDataEach)
+
+                    //before combining all the data
+                    var concatedData=filterDataEach.reduce(function(total,element){
+                      total=total.concat(element);
+                      return total
+                    },[])
+
+                    return (unique(concatedData))
+                  }
+
+                  function jointhis(complexObj){
+                    //create an array of array to incrementally store joined values
+                    joined=[[]]
+                    //for the first array in the object, push it all to a joined array
+                    for(i=0;i<complexObj[Object.keys(complexObj)[0]].length;i++){
+                      joined[0].push(stripspaces(complexObj[Object.keys(complexObj)[0]][i]))
+                    }
+
+                    //map the joined array to the next array in the object
+                    //if there's more than two variables used in selected
+                    if(Object.keys(complexObj).length>1){
+                      //starting with the second variable, until all the variables are done
+                      for(i=1;i<Object.keys(complexObj).length;i++){
+                        //create a next gen joined array to store the joined values
+                        joined[i]=[];
+                        //for all the values in the joined array, map them on all the new values and stored it in the next gen joined array
+                        joined[i-1].map(function(d){
+                          for(j=0;j<complexObj[Object.keys(complexObj)[i]].length;j++){
+                            joined[i].push(stripspaces(d)+"."+stripspaces(complexObj[Object.keys(complexObj)[i]][j]))
+                          }
+                        })
+                      }
+                    }
+
+                    //prefix with a dot
+                    joined[joined.length-1]=joined[joined.length-1].map(function(d){
+                      return "."+d;
+                    })
+                    return joined[joined.length-1]
+                  }//end of jointhis
+
+                  function unique(array){
+                      return array.filter(function(el, index, arr) {
+                          return index == arr.indexOf(el);
+                      });
+                  }
+
+                  function filterlines(filtereddata){
+                    filteredlines=[]
+                    for(i=0;i<filtereddata.length;i++){
+                      filteredlines.push({"key":"index"+i,
+                                  "education":stripspaces(filtereddata[i]["Education"]),
+                                  "region":stripspaces(filtereddata[i]["Region"]),
+                                  "age":stripspaces(filtereddata[i]["Age"]),
+                                  "sex":filtereddata[i]["Sex"],
+                                  "ethnicity":filtereddata[i]["Ethnicity"],
+                                  "value":[{"date": new Date("2011"),"amt":+filtereddata[i]["y2011"],"Education":filtereddata[i]["Education"],"Region":filtereddata[i]["Region"],"Age":filtereddata[i]["Age"],"Sex":filtereddata[i]["Sex"],"Ethnicity":filtereddata[i]["Ethnicity"]},
+                                           {"date": new Date("2012"),"amt":+filtereddata[i]["y2012"],"Education":filtereddata[i]["Education"],"Region":filtereddata[i]["Region"],"Age":filtereddata[i]["Age"],"Sex":filtereddata[i]["Sex"],"Ethnicity":filtereddata[i]["Ethnicity"]},
+                                           {"date": new Date("2013"),"amt":+filtereddata[i]["y2013"],"Education":filtereddata[i]["Education"],"Region":filtereddata[i]["Region"],"Age":filtereddata[i]["Age"],"Sex":filtereddata[i]["Sex"],"Ethnicity":filtereddata[i]["Ethnicity"]},
+                                           {"date": new Date("2014"),"amt":+filtereddata[i]["y2014"],"Education":filtereddata[i]["Education"],"Region":filtereddata[i]["Region"],"Age":filtereddata[i]["Age"],"Sex":filtereddata[i]["Sex"],"Ethnicity":filtereddata[i]["Ethnicity"]},
+                                           {"date": new Date("2015"),"amt":+filtereddata[i]["y2015"],"Education":filtereddata[i]["Education"],"Region":filtereddata[i]["Region"],"Age":filtereddata[i]["Age"],"Sex":filtereddata[i]["Sex"],"Ethnicity":filtereddata[i]["Ethnicity"]}]
+                                 })
+                    }
+                    return filteredlines
+                  }
+          function mouseLeave(){
+              d3.select('#focuscircle').attr("display","none")
+              $('.line').css("stroke-width","1")
+              d3.select("#educationtext").html("")
+              d3.select('#regiontext').html("")
+              d3.select('#agetext').html("")
+              d3.select('#sextext').html("")
+              d3.select('#ethnicitytext').html("")
+          }
+
+          function mouseMoveHandler() {
+            // get the current mouse position
+            var mx = d3.mouse(this)[0], my = d3.mouse(this)[1]
+            // use the new diagram.find() function to find the voronoi site closest to
+            // the mouse, limited by max distance defined by voronoiRadius
+            if(typeof(newvoronoi)==="undefined"){
+              var newsite = voronoi.find(mx, my, chart_width);
+            }else{
+              var newsite = newvoronoi.find(mx, my, chart_width);
+            }
+
+            d3.select("#educationtext").html(newsite.data.Education)
+            d3.select('#regiontext').html(newsite.data.Region)
+            d3.select('#agetext').html(newsite.data.Age)
+            d3.select('#sextext').html(newsite.data.Sex)
+            d3.select('#ethnicitytext').html(newsite.data.Ethnicity)
+
+            selectlineclass=makeselectclass(newsite)
+            $(".line").not(selectlineclass).css("stroke-width","1")
+            $(selectlineclass).css("stroke-width","5")
+
+
+            // d3.select('#focuscircle')
+            //   .attr("display","block")
+            //   .attr('cx', newsite[0])
+            //   .attr('cy', newsite[1]);
+          }//end mouseMoveHandler
+
+          function makeselectclass(site){
+            selectthisline=[]
+            for(i=0;i<colnames.length;i++){
+              selectthisline.push(stripspaces(site.data[colnames[i]]))
+            }
+            selectlineclass="."+selectthisline.join('.')
+            return selectlineclass
+          }
+
+
+    }//end drawGraphic
+
+
+
+    function stripspaces(str){
+    	str=str.replace(/\s+/g, '');
+    	return str;
+	   }
+
+    if (Modernizr.svg) {
+      pymChild = new pym.Child({renderCallback: initialise});
+    } else {
+      pymChild = new pymChild();
+      pymChild.sendHeight();
+    }
+
+
+    // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
+    if (!Array.prototype.findIndex) {
+      Object.defineProperty(Array.prototype, 'findIndex', {
+        value: function(predicate) {
+         // 1. Let O be ? ToObject(this value).
+          if (this == null) {
+            throw new TypeError('"this" is null or not defined');
+          }
+
+          var o = Object(this);
+
+          // 2. Let len be ? ToLength(? Get(O, "length")).
+          var len = o.length >>> 0;
+
+          // 3. If IsCallable(predicate) is false, throw a TypeError exception.
+          if (typeof predicate !== 'function') {
+            throw new TypeError('predicate must be a function');
+          }
+
+          // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
+          var thisArg = arguments[1];
+
+          // 5. Let k be 0.
+          var k = 0;
+
+          // 6. Repeat, while k < len
+          while (k < len) {
+            // a. Let Pk be ! ToString(k).
+            // b. Let kValue be ? Get(O, Pk).
+            // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
+            // d. If testResult is true, return k.
+            var kValue = o[k];
+            if (predicate.call(thisArg, kValue, k, o)) {
+              return k;
+            }
+            // e. Increase k by 1.
+            k++;
+          }
+
+          // 7. Return -1.
+          return -1;
+        },
+        configurable: true,
+        writable: true
+      });
+    }
+
+
+    </script>
+
+</body>
+</html>
