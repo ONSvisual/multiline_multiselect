@@ -774,8 +774,9 @@ input{
 			        .data(d3.entries(lines))
 			        .enter()
 			        .append('path')
-						.attr('class', 'line hoverline')
-			           // .attr('class', 'line')
+              .attr('class', function(d, i) {
+                return "line hoverline index"+i;
+               })
 					   	.style("fill","none")
 						.attr("stroke","#333")
 						.attr("opacity",0)
@@ -793,7 +794,7 @@ input{
               $("#occselect").val(listnames);
               $("#occselect").trigger("chosen:updated");
               $('#occselect').setSelectionOrder(listnames, 'true');
-              addCloseButtonDesc();
+              //addCloseButtonDesc();
 
             }).on("mouseover",function(d,i){
 
@@ -817,7 +818,7 @@ input{
 						  $("#occselect").val(listplus);
 				      $("#occselect").trigger("chosen:updated");
 							$("#occselect").setSelectionOrder(listplus, 'true');
-              addCloseButtonDesc();
+              //addCloseButtonDesc();
 
 //							setTimeout(function(){d3.selectAll(".search-choice")
 //										.style("background-color",function(d,i){return colours[i]})
@@ -1028,6 +1029,7 @@ input{
 												if(i == (listnames.length-1)){
 													hoverLine(d,i,"sel");
 													addShare();
+                          addCloseButtonDesc();
 												}
 											} else {
 												if(i==0){d3.selectAll('.selected').remove();}
@@ -1036,7 +1038,7 @@ input{
 										});
 
 
-                    addCloseButtonDesc();
+
 
 										oldlistnames = listnames;
 
